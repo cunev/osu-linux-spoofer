@@ -5,6 +5,7 @@ It is working and undetected as of 7 january 2023.
 
 > I give no guarantee that this will work for a long time, since its easy to find ways to detect the presence of Wine.
 
+Warning, the code is shit, I wrote it in 30 minutes as a proof of concept! (lolz)
 
 ## Getting started
 
@@ -22,7 +23,7 @@ To install open your terminal and:
 4. `./osu-winello.sh`
 5. Install.
 
-After install is successfull, create a file called `identity.txt` in `/home/.local/share/wineprefixes/osu-wineprefix/drive_c` and just edit it with two string separated by space ex: `Model Serial`.
+After install is successfull, create a file called `identity.txt` in `/home/.local/share/wineprefixes/osu-wineprefix/dosdevices/c:/` and just edit it with two string separated by space ex: `Model Serial`.
 
 Final step (pathing your wine-osu):
 
