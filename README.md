@@ -7,6 +7,37 @@ It is working and undetected as of 7 january 2023.
 
 Warning, the code is shit, I wrote it in 30 minutes as a proof of concept! (lolz)
 
+## For the people interested in how this works.
+
+I patched the `static enum fill_status fill_diskdrive( struct table *table, const struct expr *cond )` from `wbemprox.dll` to just return values from a file.
+
+```c
+FILE *fp;
+char model[100], serial[100];
+
+fp = fopen("C:\\identity.txt", "r");
+int items_read = fscanf(fp, "%s %s", model, serial);
+                
+size_t model_len = strlen(model);
+size_t serial_len = strlen(serial);
+WCHAR *model_w = malloc((model_len + 1) * sizeof(WCHAR));
+WCHAR *serial_w = malloc((serial_len + 1) * sizeof(WCHAR));
+mbstowcs(model_w, model, model_len + 1);
+mbstowcs(serial_w, serial, serial_len + 1);
+
+fclose(fp);
+rec->model = model_w;
+rec->serialnumber = serial_w;
+free(model_w);
+free(serial_w);
+```
+
+that's it, lol
+
+Since osu! checks only these values besides registry values, this should be enough.
+
+wanna build yourself? here -> https://github.com/mrniceguy127/osu-wine-binary-and-prefix-generator
+
 ## Getting started
 
 I included a compiled binary of wine-osu that modifies the **Disk Serial** and **Disk Model** according to a string read from a file located in **C:/identity.txt**.
